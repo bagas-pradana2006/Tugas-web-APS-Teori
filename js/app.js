@@ -121,5 +121,46 @@
     return `${p(d.getDate())}/${p(d.getMonth() + 1)}/${d.getFullYear()} ${p(d.getHours())}.${p(d.getMinutes())}`;
   };
 
+  // Ukuran layar HP (halaman petugas & anggota). Layar memakai ukuran piksel asli,
+  // lalu seluruh bingkai diperkecil dengan transform bila tidak muat di jendela browser.
+  App.initPhoneSize = () => {
+    const sel = document.getElementById("sizeSel");
+    const phone = document.querySelector(".phone");
+    const wrap = document.querySelector(".phone-wrap");
+    if (!sel || !phone || !wrap) return;
+    const KEY = "bmt-phone-size";
+    try { const saved = localStorage.getItem(KEY); if (saved && sel.querySelector(`option[value="${saved}"]`)) sel.value = saved; } catch (e) { /* penyimpanan tidak tersedia */ }
+
+    const apply = () => {
+      const [w, h] = sel.value.split("x").map(Number);
+      const classic = h <= 667; // iPhone tanpa notch: bezel atas-bawah tebal, tanpa dynamic island
+      phone.classList.toggle("classic", classic);
+      const fw = w + (classic ? 24 : 22);
+      const fh = h + (classic ? 116 : 22);
+      if (window.matchMedia("(max-width: 640px)").matches) {
+        phone.style.cssText = ""; wrap.style.cssText = "";
+        return;
+      }
+      const stacked = window.matchMedia("(max-width: 980px)").matches;
+      const fit = Math.min(1, (window.innerHeight - 100) / fh, stacked ? (window.innerWidth - 48) / fw : 1);
+      phone.style.width = fw + "px";
+      phone.style.height = fh + "px";
+      phone.style.transform = fit < 1 ? `scale(${fit})` : "";
+      wrap.style.width = fw * fit + "px";
+      wrap.style.height = fh * fit + "px";
+      const note = document.getElementById("sizeNote");
+      if (note) note.textContent = fit < 1
+        ? `Layar ${w} × ${h} px, diperkecil ${Math.round(fit * 100)}% agar muat di jendela.`
+        : `Layar ${w} × ${h} px, ukuran asli.`;
+    };
+    sel.addEventListener("change", () => {
+      try { localStorage.setItem(KEY, sel.value); } catch (e) { /* abaikan */ }
+      apply();
+    });
+    window.addEventListener("resize", apply);
+    apply();
+  };
+
   window.App = App;
+  document.addEventListener("DOMContentLoaded", App.initPhoneSize);
 })();

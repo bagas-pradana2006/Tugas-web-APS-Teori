@@ -20,6 +20,7 @@
 
   <main class="mobile-stage" id="main">
     <h1 class="sr-only">Prototype aplikasi petugas lapangan</h1>
+    <div class="phone-wrap">
     <div class="phone" aria-label="Layar HP petugas">
       <div class="phone-status" aria-hidden="true">
         <span class="ps-time">09.41</span>
@@ -123,6 +124,7 @@
       </nav>
       <div class="home-bar" aria-hidden="true"><span></span></div>
     </div>
+    </div>
 
     <aside class="side" aria-labelledby="sideTitle">
       <h2 id="sideTitle">Mobile Collector</h2>
@@ -136,6 +138,15 @@
         <option value="m05" disabled>M-05 Konfirmasi &amp; resi (lewat M-03)</option>
         <option value="m04">M-04 Riwayat &amp; sinkronisasi</option>
       </select>
+      <label class="side-label" for="sizeSel">Ukuran layar</label>
+      <select class="select side-select" id="sizeSel">
+        <option value="320x568">320 × 568 (minimum)</option>
+        <option value="375x667">375 × 667 (SE / 8)</option>
+        <option value="375x812">375 × 812 (X / mini)</option>
+        <option value="390x844" selected>390 × 844 (standar)</option>
+        <option value="430x932">430 × 932 (Pro Max)</option>
+      </select>
+      <p class="side-hint" id="sizeNote"></p>
       <p class="side-hint">Ketuk Online/Offline di layar untuk simulasi sinyal hilang. Kata sandi contoh: bebas, minimal 6 karakter.</p>
       <p class="side-hint">Sisi kasir: <a href="rekonsiliasi.html">Rekonsiliasi kas (W-01)</a></p>
     </aside>

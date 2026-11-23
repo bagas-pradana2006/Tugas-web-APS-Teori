@@ -20,6 +20,7 @@
 
   <main class="mobile-stage" id="main">
     <h1 class="sr-only">Prototype aplikasi anggota BMT Pasra Mobile</h1>
+    <div class="phone-wrap">
     <div class="phone" aria-label="Layar HP anggota">
       <div class="phone-status" aria-hidden="true">
         <span class="ps-time">09.41</span>
@@ -131,6 +132,7 @@
       </nav>
       <div class="home-bar" aria-hidden="true"><span></span></div>
     </div>
+    </div>
 
     <aside class="side" aria-labelledby="sideTitle">
       <h2 id="sideTitle">BMT Pasra Mobile</h2>
@@ -145,6 +147,15 @@
         <option value="p05d" disabled>Detail transaksi (dari notifikasi)</option>
         <option value="p06">P-06 QR anggota</option>
       </select>
+      <label class="side-label" for="sizeSel">Ukuran layar</label>
+      <select class="select side-select" id="sizeSel">
+        <option value="320x568">320 × 568 (minimum)</option>
+        <option value="375x667">375 × 667 (SE / 8)</option>
+        <option value="375x812">375 × 812 (X / mini)</option>
+        <option value="390x844" selected>390 × 844 (standar)</option>
+        <option value="430x932">430 × 932 (Pro Max)</option>
+      </select>
+      <p class="side-hint" id="sizeNote"></p>
       <p class="side-hint">PIN contoh: <strong>123456</strong></p>
       <p class="side-label" style="margin-top:14px">Uji notifikasi US-03</p>
       <div class="side-actions">
