@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitor Integrasi CBS · Back Office BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="bo-header">
+    <div class="bo-header-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Back Office · Cabang Malang Utama</span></a>
+      <nav class="bo-nav" aria-label="Modul back office">
+        <ul>
+          <li><a href="pengajuan.html">Pengajuan</a></li>
+          <li><a href="persetujuan.html">Persetujuan</a></li>
+          <li><a href="monitoring.html">Monitoring</a></li>
+          <li><a href="rekonsiliasi.html">Rekonsiliasi Kasir</a></li>
+          <li><a href="integrasi.html" aria-current="page">Integrasi CBS</a></li>
+        </ul>
+      </nav>
+      <span class="bo-role"><span class="sr-only">Masuk sebagai: </span>Admin IT</span>
+    </div>
+  </header>
+
+  <main class="bo-main" id="main">
+    <details class="testbar">
+      <summary>Panel uji prototype (I-01)</summary>
+      <div class="testbar-body">
+        <div class="field">
+          <label for="simConn">Koneksi ke gateway CBS</label>
+          <select class="select" id="simConn"><option value="ok">Normal</option><option value="down">Terputus (status gagal)</option></select>
+        </div>
+      </div>
+    </details>
+
+    <div class="page-head">
+      <h1>Monitor integrasi CBS</h1>
+      <p>Gateway posting jurnal dari modul lapangan dan back office ke Core Banking System.</p>
+    </div>
+    <div id="content"></div>
+    <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+  </main>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/integrasi.js" defer></script>
+</body>
+</html>

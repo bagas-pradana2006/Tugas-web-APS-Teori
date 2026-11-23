@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Antrean Persetujuan · Back Office BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="bo-header">
+    <div class="bo-header-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Back Office · Cabang Malang Utama</span></a>
+      <nav class="bo-nav" aria-label="Modul back office">
+        <ul>
+          <li><a href="pengajuan.html">Pengajuan</a></li>
+          <li><a href="persetujuan.html" aria-current="page">Persetujuan</a></li>
+          <li><a href="monitoring.html">Monitoring</a></li>
+          <li><a href="rekonsiliasi.html">Rekonsiliasi Kasir</a></li>
+          <li><a href="integrasi.html">Integrasi CBS</a></li>
+        </ul>
+      </nav>
+      <span class="bo-role"><span class="sr-only">Masuk sebagai: </span>Komite Pembiayaan</span>
+    </div>
+  </header>
+
+  <main class="bo-main" id="main">
+    <details class="testbar">
+      <summary>Panel uji prototype (US-02)</summary>
+      <div class="testbar-body">
+        <p class="field-hint">PIN otorisasi contoh untuk uji: <strong>123456</strong>. Tiga kali PIN salah memblokir aksi persetujuan sementara (alt A4). Catatan wajib diisi untuk Tolak dan Kembalikan (alt A3).</p>
+      </div>
+    </details>
+
+    <div class="page-head">
+      <h1>Antrean persetujuan</h1>
+      <p>Pantau posisi setiap pengajuan dan putuskan yang menjadi kewenangan Anda.</p>
+    </div>
+
+    <div class="seg" id="filterSeg" role="group" aria-label="Saring status"></div>
+
+    <div class="layout-2">
+      <section class="card" style="padding:0;overflow:hidden" aria-label="Daftar pengajuan">
+        <div id="queue"></div>
+      </section>
+      <section class="card" id="detail" aria-live="polite"></section>
+    </div>
+    <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+  </main>
+
+  <dialog class="modal" id="pinDialog" aria-labelledby="pinTitle">
+    <form method="dialog" id="pinForm" novalidate>
+      <h2 id="pinTitle">Masukkan PIN otorisasi</h2>
+      <p class="field-hint" id="pinSub"></p>
+      <div class="field" style="margin-top:14px">
+        <label for="pinInput">PIN 6 digit</label>
+        <input class="input" id="pinInput" type="password" inputmode="numeric" maxlength="6" autocomplete="off">
+        <span class="field-error" id="pinErr" role="alert"></span>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="pinCancel">Batal</button>
+        <button type="submit" class="btn btn-primary" id="pinOk">Konfirmasi</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/persetujuan.js" defer></script>
+</body>
+</html>

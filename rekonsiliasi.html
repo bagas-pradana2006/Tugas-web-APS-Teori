@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rekonsiliasi Kas Shift · Back Office BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="bo-header">
+    <div class="bo-header-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Back Office · Cabang Malang Utama</span></a>
+      <nav class="bo-nav" aria-label="Modul back office">
+        <ul>
+          <li><a href="pengajuan.html">Pengajuan</a></li>
+          <li><a href="persetujuan.html">Persetujuan</a></li>
+          <li><a href="monitoring.html">Monitoring</a></li>
+          <li><a href="rekonsiliasi.html" aria-current="page">Rekonsiliasi Kasir</a></li>
+          <li><a href="integrasi.html">Integrasi CBS</a></li>
+        </ul>
+      </nav>
+      <span class="bo-role"><span class="sr-only">Masuk sebagai: </span>Kasir Cabang</span>
+    </div>
+  </header>
+
+  <main class="bo-main" id="main">
+    <div class="page-head">
+      <h1>Rekonsiliasi kas shift</h1>
+      <p>Shift 29/09/2026 · Cabang Malang Utama</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px"><h2 class="sr-only">Jalur status shift</h2><ol class="track" id="shiftTrack"></ol></div>
+
+    <div class="layout-2">
+      <div class="stack">
+        <section class="card" aria-labelledby="petugasTitle">
+          <h2 id="petugasTitle">Setoran digital per petugas</h2>
+          <div id="petugasTable"></div>
+        </section>
+        <section class="card" aria-labelledby="trxTitle">
+          <h2 id="trxTitle">Transaksi terakhir</h2>
+          <div id="trxTable"></div>
+        </section>
+      </div>
+      <section class="card" aria-labelledby="matchTitle">
+        <h2 id="matchTitle">Pencocokan kas</h2>
+        <form id="matchForm" novalidate>
+          <dl style="margin:0"><div class="kv"><dt>Total setoran digital</dt><dd id="digitalTotal"></dd></div></dl>
+          <div class="field" style="margin-top:14px">
+            <label for="fisik">Uang fisik diterima *</label>
+            <input class="input" id="fisik" inputmode="numeric" autocomplete="off">
+          </div>
+          <div class="diff" id="diffBox" aria-live="polite"></div>
+          <div class="field">
+            <label for="catatan">Catatan selisih (wajib bila tidak cocok)</label>
+            <input class="input" id="catatan">
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" id="btnNext">Lanjut ke petugas berikutnya</button>
+            <button type="submit" class="btn btn-primary" id="btnLock">Kunci shift</button>
+          </div>
+          <p class="field-hint" style="margin-top:12px">Shift yang sudah dikunci tidak bisa diubah. Koreksi sesudahnya lewat pembatalan transaksi.</p>
+        </form>
+      </section>
+    </div>
+    <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+  </main>
+
+  <dialog class="modal" id="voidDialog" aria-labelledby="voidTitle">
+    <form id="voidForm" novalidate>
+      <h2 id="voidTitle">Batalkan transaksi</h2>
+      <p class="field-hint" id="voidSub"></p>
+      <div class="field" style="margin-top:14px">
+        <label for="voidReason">Alasan pembatalan *</label>
+        <textarea class="textarea" id="voidReason"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" data-close>Kembali</button>
+        <button type="submit" class="btn btn-danger">Buat transaksi pembalik</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="lockDialog" aria-labelledby="lockTitle">
+    <h2 id="lockTitle">Kunci shift 29/09/2026?</h2>
+    <p class="field-hint" id="lockSub"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" data-close>Batal</button>
+      <button type="button" class="btn btn-primary" id="lockConfirm">Kunci shift</button>
+    </div>
+  </dialog>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/rekonsiliasi.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aplikasi Petugas · Mobile Collector · BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="mobile-page">
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="mobile-top">
+    <div class="mobile-top-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Aplikasi Petugas · Mobile Collector Real-Time</span></a>
+      <a href="index.html">Kembali ke daftar modul</a>
+    </div>
+  </header>
+
+  <main class="mobile-stage" id="main">
+    <h1 class="sr-only">Prototype aplikasi petugas lapangan</h1>
+    <div class="phone" aria-label="Layar HP petugas">
+      <div id="toastAnchor"></div>
+
+      <!-- M-01 Login -->
+      <section class="phone-screen" id="m01" aria-labelledby="m01t">
+        <div class="m-grow" style="padding-top:28px">
+          <p class="m-note">KSPPS BMT Sidogiri</p>
+          <h2 id="m01t" style="font-size:1.4rem;margin:2px 0 6px">Mobile Collector</h2>
+          <p style="color:var(--muted);font-size:.92rem;margin-bottom:20px">Masuk dengan akun petugas untuk mulai mencatat setoran di rute hari ini.</p>
+          <form id="loginForm" novalidate style="display:grid;gap:14px">
+            <div class="field"><label for="lgId">ID Petugas</label><input class="input" id="lgId" autocomplete="username" value="rafi.collector"></div>
+            <div class="field"><label for="lgPw">Kata sandi</label><input class="input" id="lgPw" type="password" autocomplete="current-password"></div>
+            <span class="field-error" id="lgErr" role="alert"></span>
+            <div class="m-card"><div class="m-row" style="padding:0"><span>Rute hari ini</span><strong>Pasar Dinoyo</strong></div>
+              <p class="m-note" style="margin-top:6px">Data anggota rute diunduh ke HP saat masuk dan berlaku 24 jam untuk transaksi offline.</p></div>
+            <button class="btn btn-primary btn-block" type="submit" style="margin-top:8px">Masuk</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- M-02 Setoran / validasi anggota -->
+      <section class="phone-screen" id="m02" hidden aria-labelledby="m02t">
+        <div class="m-head"><div><h2 id="m02t">Setoran</h2><p>Rute Pasar Dinoyo</p></div><button type="button" class="net-toggle" data-net></button></div>
+        <button type="button" class="scanbox" id="btnScan">
+          <span class="scanframe" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span>Arahkan kamera ke QR anggota</span>
+          <span class="field-hint">Prototype: ketuk untuk memindai QR contoh anggota 04312</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-block" id="btnShowSearch" style="margin:12px 0" aria-expanded="false" aria-controls="searchBox">Cari lewat ID Anggota</button>
+        <form id="searchBox" hidden novalidate class="m-card">
+          <div class="field"><label for="srcId">ID anggota (5 digit)</label>
+            <div class="input-row"><input class="input" id="srcId" inputmode="numeric" maxlength="5" placeholder="contoh 04312"><button class="btn btn-primary" type="submit">Cari</button></div>
+            <span class="field-hint">Coba 04312 (aktif) atau 04377 (nonaktif).</span></div>
+        </form>
+        <div id="memberCard"></div>
+        <div class="m-grow"></div>
+        <div class="m-foot"><button type="button" class="btn btn-primary btn-block" id="btnToInput" disabled>Lanjut ke setoran</button></div>
+      </section>
+
+      <!-- M-03 Input setoran -->
+      <section class="phone-screen" id="m03" hidden aria-labelledby="m03t">
+        <div class="m-back"><button type="button" data-go="m02" aria-label="Kembali ke Setoran"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="m03t" style="font-size:1.2rem">Input setoran</h2></div>
+        <div class="m-card" style="margin-top:8px"><div class="m-row" style="padding:0"><strong id="inMember"></strong><span id="inSaldo"></span></div></div>
+        <form id="depositForm" novalidate class="m-grow" style="display:flex;flex-direction:column">
+          <p class="label" style="font-size:.85rem;font-weight:600;margin-bottom:6px" id="jenisLbl">Jenis transaksi</p>
+          <div class="choice" role="group" aria-labelledby="jenisLbl">
+            <button type="button" aria-pressed="true" data-jenis="Simpanan">Simpanan</button>
+            <button type="button" aria-pressed="false" data-jenis="Angsuran">Angsuran</button>
+          </div>
+          <div class="field" style="margin-top:14px">
+            <label for="nominal">Nominal setoran</label>
+            <input class="input amount-input" id="nominal" inputmode="numeric" autocomplete="off" placeholder="Rp 0">
+            <span class="field-hint">Batas cabang Rp10.000 sampai Rp5.000.000</span>
+          </div>
+          <div class="m-card" style="margin-top:12px"><div class="m-row" style="padding:0"><span>Printer resi</span><span class="badge badge-green">Terhubung</span></div></div>
+          <div class="m-grow"></div>
+          <button class="btn btn-primary btn-block" type="submit">Proses &amp; cetak resi</button>
+        </form>
+      </section>
+
+      <!-- M-05 Konfirmasi & resi -->
+      <section class="phone-screen" id="m05" hidden aria-labelledby="m05t">
+        <div class="success-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2 id="m05t" style="text-align:center;font-size:1.15rem" aria-live="polite"></h2>
+        <p class="m-note" style="text-align:center;margin:4px 0 14px" id="resiNo"></p>
+        <div class="m-card"><ol class="mini-track" id="syncTrack"></ol></div>
+        <div class="m-card" id="resiBody"></div>
+        <p class="m-note" id="resiNote"></p>
+        <div class="m-grow"></div>
+        <div class="m-foot" style="grid-template-columns:1fr 1fr">
+          <button type="button" class="btn btn-secondary" id="btnReprint">Cetak ulang</button>
+          <button type="button" class="btn btn-primary" id="btnDone">Selesai</button>
+        </div>
+      </section>
+
+      <!-- M-04 Riwayat & sinkronisasi -->
+      <section class="phone-screen" id="m04" hidden aria-labelledby="m04t">
+        <div class="m-head"><div><h2 id="m04t">Riwayat hari ini</h2><p>Rute Pasar Dinoyo</p></div><button type="button" class="net-toggle" data-net></button></div>
+        <div id="syncBanner" aria-live="polite"></div>
+        <div class="m-card" id="histList"></div>
+        <div class="m-grow"></div>
+        <div class="m-foot"><button type="button" class="btn btn-secondary btn-block" id="btnSync"></button></div>
+      </section>
+
+      <nav class="tabbar" id="tabbar" hidden aria-label="Menu aplikasi petugas">
+        <button type="button" data-tab="m02" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg>
+          Setoran</button>
+        <button type="button" data-tab="m04">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+          <span>Riwayat <span class="tab-count" id="pendCount"></span></span></button>
+      </nav>
+    </div>
+
+    <aside class="side" aria-labelledby="sideTitle">
+      <h2 id="sideTitle">Mobile Collector Real-Time</h2>
+      <p>PIC: Muhammad Rafi Fadillah. Petugas jemput bola di pasar memindai QR anggota, mencatat setoran, dan mencetak resi. Transaksi tetap tersimpan di HP saat offline lalu tersinkron otomatis ketika sinyal kembali.</p>
+      <div class="card">
+        <h3>Lompat ke layar</h3>
+        <div class="jump" id="jump">
+          <button type="button" data-jump="m01">M-01 Login petugas</button>
+          <button type="button" data-jump="m02">M-02 Validasi anggota</button>
+          <button type="button" data-jump="m02b">M-02b Anggota nonaktif</button>
+          <button type="button" data-jump="m03">M-03 Input setoran</button>
+          <button type="button" data-jump="m04">M-04 Riwayat &amp; sinkronisasi</button>
+        </div>
+        <p class="field-hint" style="margin-top:12px">Ketuk label Online/Offline di layar untuk mensimulasikan sinyal hilang. Kata sandi contoh: bebas, minimal 6 karakter.</p>
+      </div>
+      <div class="card">
+        <h3>Sisi kasir</h3>
+        <p style="margin-top:6px">Setoran petugas dicocokkan kasir di <a href="rekonsiliasi.html">Rekonsiliasi kas shift (W-01)</a>.</p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/petugas.js" defer></script>
+</body>
+</html>

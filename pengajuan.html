@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pengajuan & Credit Scoring · Back Office BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+
+  <header class="bo-header">
+    <div class="bo-header-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Back Office · Cabang Malang Utama</span></a>
+      <nav class="bo-nav" aria-label="Modul back office">
+        <ul>
+          <li><a href="pengajuan.html" aria-current="page">Pengajuan</a></li>
+          <li><a href="persetujuan.html">Persetujuan</a></li>
+          <li><a href="monitoring.html">Monitoring</a></li>
+          <li><a href="rekonsiliasi.html">Rekonsiliasi Kasir</a></li>
+          <li><a href="integrasi.html">Integrasi CBS</a></li>
+        </ul>
+      </nav>
+      <span class="bo-role" id="roleChip"><span class="sr-only">Masuk sebagai: </span>Analis Kredit</span>
+    </div>
+  </header>
+
+  <div class="subnav">
+    <div class="subnav-inner" role="tablist" aria-label="Menu pengajuan" id="subTabs">
+      <button role="tab" id="tab-baru" aria-controls="panel-baru" data-hash="baru">Pengajuan baru</button>
+      <button role="tab" id="tab-hasil" aria-controls="panel-hasil" data-hash="hasil">Hasil assessment</button>
+      <button role="tab" id="tab-riwayat" aria-controls="panel-riwayat" data-hash="riwayat">Riwayat assessment</button>
+      <button role="tab" id="tab-parameter" aria-controls="panel-parameter" data-hash="parameter">Parameter scoring</button>
+    </div>
+  </div>
+
+  <main class="bo-main" id="main">
+    <details class="testbar">
+      <summary>Panel uji prototype (skenario US-04)</summary>
+      <div class="testbar-body">
+        <div class="field">
+          <label for="simCase">Data contoh pengajuan</label>
+          <select class="select" id="simCase">
+            <option value="PB-0142">PB-0142 · Warung Sembako A (alur utama, risiko sedang)</option>
+            <option value="PB-0157">PB-0157 · Toko Kelontong B (alt 6a, risiko tinggi)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="check" for="simCbsDown"><input type="checkbox" id="simCbsDown"> Alt 3a: Sistem Inti BMT tidak merespons</label>
+        </div>
+        <p class="field-hint">Alt 2a: kosongkan kolom wajib lalu tekan Hitung skor.</p>
+      </div>
+    </details>
+
+    <!-- ================= Pengajuan baru (S-01 / US04-01, 02, 04, 05) ================= -->
+    <section id="panel-baru" role="tabpanel" aria-labelledby="tab-baru">
+      <div class="page-head">
+        <h1 id="formTitle">Pengajuan pembiayaan baru</h1>
+        <p id="formSub">Isi data pengajuan dan usaha anggota, lalu hitung skor kelayakan secara otomatis.</p>
+      </div>
+
+      <div class="card" style="margin-bottom:22px">
+        <h2 class="sr-only">Jalur status pengajuan</h2>
+        <ol class="track" id="formTrack"></ol>
+      </div>
+
+      <div id="formAlert" class="notice notice-red" role="alert" hidden style="margin-bottom:22px"></div>
+
+      <div class="layout-2">
+        <form class="card" id="appForm" novalidate>
+          <h2>Data pengajuan</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label for="fId">ID anggota *</label>
+              <div class="input-row">
+                <input class="input" id="fId" name="id" autocomplete="off" required>
+                <button type="button" class="btn btn-secondary" id="btnCari">Cari</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="fNama">Nama anggota (terisi otomatis)</label>
+              <input class="input" id="fNama" readonly>
+            </div>
+            <div class="field">
+              <label for="fJumlah">Jumlah pembiayaan *</label>
+              <input class="input" id="fJumlah" inputmode="numeric" required data-rupiah data-label="Jumlah pembiayaan">
+            </div>
+            <div class="field">
+              <label for="fAkad">Akad *</label>
+              <select class="select" id="fAkad" required data-label="Akad">
+                <option value="">Pilih akad</option>
+                <option>Murabahah</option>
+                <option>Musyarakah</option>
+                <option>Mudharabah</option>
+                <option>Ijarah</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="fTujuan">Tujuan pembiayaan *</label>
+              <input class="input" id="fTujuan" required data-label="Tujuan pembiayaan">
+            </div>
+
+            <h3 class="form-section">Data usaha</h3>
+            <div class="field">
+              <label for="fJenis">Jenis usaha *</label>
+              <input class="input" id="fJenis" required data-label="Jenis usaha">
+            </div>
+            <div class="field">
+              <label for="fLama">Lama usaha (tahun) *</label>
+              <input class="input" id="fLama" type="number" min="0" inputmode="numeric" required data-label="Lama usaha">
+            </div>
+            <div class="field">
+              <label for="fOmzet">Omzet bulanan *</label>
+              <input class="input" id="fOmzet" inputmode="numeric" required data-rupiah data-label="Omzet bulanan">
+            </div>
+            <div class="field">
+              <label for="fKapasitas">Kapasitas bayar per bulan *</label>
+              <input class="input" id="fKapasitas" inputmode="numeric" required data-rupiah data-label="Kapasitas bayar">
+            </div>
+            <div class="field full">
+              <label for="fAgunan">Agunan *</label>
+              <input class="input" id="fAgunan" required data-label="Agunan">
+            </div>
+
+            <h3 class="form-section">Dokumen pendukung</h3>
+            <div class="full">
+              <label class="dropzone" for="fFiles" id="dropzone">
+                <strong>Seret berkas ke sini atau pilih dari komputer</strong>
+                <span>PDF, JPG, atau PNG, maksimal 5 MB per berkas</span>
+              </label>
+              <input type="file" id="fFiles" class="sr-only" multiple accept=".pdf,.jpg,.jpeg,.png">
+              <span class="field-error" id="fileErr"></span>
+              <ul class="chips" id="fileChips" aria-label="Berkas terunggah" style="list-style:none;padding:0"></ul>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" id="btnDraft">Simpan draft</button>
+            <button type="submit" class="btn btn-primary" id="btnHitung">Hitung skor</button>
+          </div>
+        </form>
+
+        <div class="stack">
+          <section class="card" aria-labelledby="riwayatTitle">
+            <h2 id="riwayatTitle">Riwayat anggota</h2>
+            <div id="memberBox"></div>
+          </section>
+          <section class="card">
+            <h2>Ketentuan penilaian</h2>
+            <ul class="rules">
+              <li>Skor dihitung otomatis setelah semua kolom wajib terisi.</li>
+              <li>Hasil skor tampil dalam maksimal 3 detik.</li>
+              <li>Kolom bertanda * wajib diisi. Bila ada yang kosong, status tetap Draft.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+    </section>
+
+    <!-- ================= Hasil assessment (S-02 / US04-03, 06) ================= -->
+    <section id="panel-hasil" role="tabpanel" aria-labelledby="tab-hasil" hidden>
+      <div class="page-head">
+        <h1>Hasil assessment</h1>
+        <p id="hasilSub">Belum ada pengajuan yang dinilai.</p>
+      </div>
+      <div id="hasilBody"></div>
+      <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+    </section>
+
+    <!-- ================= Riwayat assessment (S-03) ================= -->
+    <section id="panel-riwayat" role="tabpanel" aria-labelledby="tab-riwayat" hidden>
+      <div class="page-head">
+        <h1>Riwayat assessment</h1>
+        <p>Telusuri hasil assessment berdasarkan tanggal, kategori risiko, dan status.</p>
+      </div>
+      <form class="card" id="histFilter" style="margin-bottom:22px">
+        <div class="filters">
+          <div class="field"><label for="hFrom">Tanggal dari</label><input class="input" type="date" id="hFrom" value="2026-09-01"></div>
+          <div class="field"><label for="hTo">Sampai</label><input class="input" type="date" id="hTo" value="2026-09-29"></div>
+          <div class="field"><label for="hKat">Kategori risiko</label>
+            <select class="select" id="hKat"><option value="">Semua kategori</option><option>Rendah</option><option>Sedang</option><option>Tinggi</option></select></div>
+          <div class="field"><label for="hStatus">Status</label>
+            <select class="select" id="hStatus"><option value="">Semua status</option><option>Review analis</option><option>Survei lanjutan</option><option>Diajukan ke komite</option></select></div>
+          <div class="filter-actions">
+            <button class="btn btn-primary" type="submit">Terapkan filter</button>
+            <button class="btn btn-secondary" type="button" id="hReset">Reset</button>
+          </div>
+        </div>
+        <span class="field-error" id="hErr" role="alert"></span>
+      </form>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div id="histBody"></div>
+      </div>
+      <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+    </section>
+
+    <!-- ================= Parameter scoring (S-04) ================= -->
+    <section id="panel-parameter" role="tabpanel" aria-labelledby="tab-parameter" hidden>
+      <div class="page-head">
+        <h1>Kelola parameter scoring</h1>
+        <p>Hanya untuk peran Admin Scoring. Setiap perubahan bobot membuat versi baru dan tercatat di Audit_Log.</p>
+      </div>
+      <div class="layout-2">
+        <form class="card" id="weightForm">
+          <div class="card-head"><h2>Bobot parameter <span class="badge badge-green" id="activeVerBadge">Versi aktif v3</span></h2></div>
+          <div id="weightRows"></div>
+          <div class="list-row" style="border:0">
+            <strong>Total bobot</strong>
+            <span><strong id="weightTotal" style="font-size:1.2rem">100%</strong> <span class="badge badge-green" id="weightValid">Valid</span></span>
+          </div>
+          <p class="notice notice-amber">Total bobot harus tepat 100%. Hasil assessment lama tetap memakai versi bobot sebelumnya.</p>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" id="wCancel">Batal</button>
+            <button type="submit" class="btn btn-primary" id="wSave" disabled>Simpan sebagai versi baru</button>
+          </div>
+        </form>
+        <section class="card" aria-labelledby="verTitle">
+          <h2 id="verTitle">Riwayat versi bobot</h2>
+          <div id="versionList"></div>
+        </section>
+      </div>
+      <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+    </section>
+  </main>
+
+  <!-- Dialog proses hitung skor (US04-02) -->
+  <dialog class="modal" id="scoreDialog" aria-labelledby="scoreDlgTitle">
+    <div class="spinner" aria-hidden="true"></div>
+    <h2 id="scoreDlgTitle" style="margin-top:14px">Menghitung skor kelayakan…</h2>
+    <p class="field-hint" id="scoreDlgSub"></p>
+    <ul class="steps-list" id="scoreSteps" aria-live="polite"></ul>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-secondary" id="scoreCancel">Batalkan</button>
+    </div>
+  </dialog>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/pengajuan.js" defer></script>
+</body>
+</html>

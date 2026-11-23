@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BMT Pasra Mobile · Aplikasi Anggota · BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="mobile-page">
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="mobile-top">
+    <div class="mobile-top-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Aplikasi Anggota · BMT Pasra Mobile</span></a>
+      <a href="index.html">Kembali ke daftar modul</a>
+    </div>
+  </header>
+
+  <main class="mobile-stage" id="main">
+    <h1 class="sr-only">Prototype aplikasi anggota BMT Pasra Mobile</h1>
+    <div class="phone" aria-label="Layar HP anggota">
+      <div id="pushSlot" aria-live="assertive"></div>
+
+      <!-- P-01 PIN -->
+      <section class="phone-screen" id="p01" aria-labelledby="p01t">
+        <div style="text-align:center;padding-top:22px">
+          <p class="m-note">KSPPS BMT Sidogiri · BMT Pasra Mobile</p>
+          <h2 id="p01t" style="font-size:1.35rem;margin:4px 0">Selamat datang, H. Ahmad</h2>
+          <p style="color:var(--muted);font-size:.92rem">Masukkan PIN 6 digit untuk membuka aplikasi.</p>
+        </div>
+        <div class="pin-dots" id="pinDots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="sr-only" aria-live="polite" id="pinSr"></p>
+        <p class="field-error" id="pinErr" role="alert" style="text-align:center;min-height:1.2em"></p>
+        <div class="keypad" id="keypad">
+          <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button>
+          <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button>
+          <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button>
+          <button type="button" class="small bio" data-k="bio">Sidik jari</button><button type="button" data-k="0">0</button><button type="button" class="small" data-k="del" aria-label="Hapus satu digit">Hapus</button>
+        </div>
+        <button type="button" class="btn-link" id="btnForgot" style="margin:18px auto 0;min-height:44px">Lupa PIN?</button>
+        <p class="m-note" style="text-align:center;margin-top:10px">Aplikasi keluar otomatis setelah 3 menit tidak dipakai.</p>
+      </section>
+
+      <!-- P-02 Beranda -->
+      <section class="phone-screen" id="p02" hidden aria-labelledby="p02t">
+        <div class="m-head"><div><h2 id="p02t">Halo, H. Ahmad</h2><p>ID anggota 04312 · Pasar Dinoyo</p></div>
+          <button type="button" class="btn btn-primary" data-go="p06" style="min-height:40px;padding:0 12px;font-size:.85rem">QR saya</button></div>
+        <div class="balance"><span>Saldo simpanan</span><strong id="saldoBig"></strong><small id="saldoUpd"></small></div>
+        <div class="m-card"><div class="m-row" style="padding:0"><span>Sisa pembiayaan</span><span class="badge badge-green">Lancar</span></div><strong style="font-size:1.1rem" id="sisaBig"></strong></div>
+        <button type="button" class="btn btn-secondary btn-block" data-go="p04">Ajukan pembiayaan</button>
+        <div class="m-row" style="margin-top:14px;align-items:center"><h3>Transaksi terakhir</h3><button type="button" class="btn-link" data-go="p03" style="min-height:44px">Lihat semua</button></div>
+        <div class="m-card" id="recentTx"></div>
+      </section>
+
+      <!-- P-03 Mutasi -->
+      <section class="phone-screen" id="p03" hidden aria-labelledby="p03t">
+        <div class="m-head"><div><h2 id="p03t">Mutasi rekening</h2><p>September 2026</p></div></div>
+        <div class="chipbar" id="mutasiFilter" role="group" aria-label="Saring mutasi">
+          <button type="button" aria-pressed="true" data-mf="">Semua</button>
+          <button type="button" aria-pressed="false" data-mf="Simpanan">Simpanan</button>
+          <button type="button" aria-pressed="false" data-mf="Pembiayaan">Pembiayaan</button>
+        </div>
+        <div class="m-card" style="background:var(--brand-100)"><div class="m-row" style="padding:0"><span style="color:var(--text)">Saldo simpanan akhir</span><strong id="saldoAkhir"></strong></div>
+          <p class="m-note" id="mutasiSum"></p></div>
+        <div class="m-card" id="mutasiList"></div>
+        <p class="m-note">Data contoh ilustrasi dari laporan kelompok.</p>
+      </section>
+
+      <!-- P-04 Ajukan pembiayaan -->
+      <section class="phone-screen" id="p04" hidden aria-labelledby="p04t">
+        <div class="m-head"><div><h2 id="p04t">Ajukan pembiayaan</h2><p>Pengajuan diteruskan ke analis kredit cabang Anda.</p></div></div>
+        <div class="m-card"><ol class="mini-track" id="ajuTrack"></ol></div>
+        <form id="ajuForm" novalidate style="display:grid;gap:14px">
+          <div class="field"><label for="aJumlah">Jumlah pembiayaan</label><input class="input" id="aJumlah" inputmode="numeric" placeholder="Rp 0"></div>
+          <div class="field"><label for="aAkad">Akad</label>
+            <select class="select" id="aAkad"><option value="">Pilih akad</option><option>Murabahah</option><option>Musyarakah</option><option>Mudharabah</option></select></div>
+          <div class="field"><label for="aTujuan">Tujuan pembiayaan</label><input class="input" id="aTujuan" placeholder="Contoh: tambah stok dagangan"></div>
+          <div class="field"><label class="check" for="aConsent"><input type="checkbox" id="aConsent"> Saya setuju data simpanan dan usaha saya dipakai untuk menilai kelayakan pembiayaan.</label></div>
+          <button class="btn btn-primary btn-block" type="submit" id="aSubmit">Kirim pengajuan</button>
+        </form>
+      </section>
+
+      <!-- P-05 Notifikasi -->
+      <section class="phone-screen" id="p05" hidden aria-labelledby="p05t">
+        <div class="m-head"><div><h2 id="p05t">Notifikasi</h2><p>Pemberitahuan setiap ada transaksi di rekening Anda.</p></div></div>
+        <div class="chipbar" id="notifFilter" role="group" aria-label="Saring notifikasi">
+          <button type="button" aria-pressed="true" data-nf="all">Semua</button>
+          <button type="button" aria-pressed="false" data-nf="unread">Belum dibaca</button>
+        </div>
+        <div class="m-card" id="notifList" style="padding:4px 14px"></div>
+        <p class="m-note">Notifikasi yang sama juga dikirim lewat WhatsApp atau SMS.</p>
+      </section>
+
+      <!-- Detail transaksi (S3 US-03) -->
+      <section class="phone-screen" id="p05d" hidden aria-labelledby="p05dt">
+        <div class="m-back"><button type="button" data-go="p05" aria-label="Kembali ke Notifikasi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="p05dt" style="font-size:1.2rem">Detail transaksi</h2></div>
+        <div id="notifDetail"></div>
+      </section>
+
+      <!-- P-06 QR anggota -->
+      <section class="phone-screen" id="p06" hidden aria-labelledby="p06t">
+        <div class="m-back"><button type="button" data-go="p02" aria-label="Kembali ke Beranda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 id="p06t" style="font-size:1.2rem">QR anggota</h2></div>
+        <div class="m-card" style="text-align:center;margin-top:8px">
+          <svg class="qr" viewBox="0 0 21 21" role="img" aria-label="Penanda tempat QR anggota 04312, bukan kode QR asli" id="qrSvg"></svg>
+          <p class="m-note">[QR contoh: kode asli dibuat sistem dari ID anggota]</p>
+          <strong style="display:block;margin-top:10px">H. Ahmad</strong>
+          <p class="m-note">ID anggota 04312 · Pasar Dinoyo</p>
+          <span class="badge badge-green" style="margin-top:8px">Anggota aktif</span>
+        </div>
+        <div class="m-card" style="background:var(--brand-100)"><strong>Tunjukkan QR ini ke petugas lapangan saat setor.</strong>
+          <p style="font-size:.85rem;margin-top:6px">QR ini sama dengan yang tercetak di kartu anggota, jadi tetap bisa dipindai walau HP petugas sedang offline.</p></div>
+        <p class="m-note" style="text-align:center">Jangan bagikan foto QR ini ke orang lain. Kartu hilang? Laporkan ke kantor cabang.</p>
+      </section>
+
+      <nav class="tabbar" id="tabbar" hidden aria-label="Menu aplikasi anggota">
+        <button type="button" data-tab="p02"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Beranda</button>
+        <button type="button" data-tab="p03"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>Mutasi</button>
+        <button type="button" data-tab="p04"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M13 12v6M10 15h6"/></svg>Ajukan</button>
+        <button type="button" data-tab="p05"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/></svg><span>Notifikasi <span class="tab-count" id="unreadCount"></span></span></button>
+      </nav>
+    </div>
+
+    <aside class="side" aria-labelledby="sideTitle">
+      <h2 id="sideTitle">BMT Pasra Mobile</h2>
+      <p>PIC: R. Ahmad Syarif Hidayatullah. Anggota memantau saldo, mutasi, dan pembiayaan, menerima notifikasi transaksi real-time (US-03), dan menunjukkan QR saat setor ke petugas.</p>
+      <div class="card">
+        <h3>Uji notifikasi US-03</h3>
+        <p style="margin-top:6px">Kirim event transaksi terkonfirmasi. Push muncul di layar HP, lalu ketuk untuk membuka detail (status DIBACA).</p>
+        <div class="jump">
+          <button type="button" id="simIn">Simulasikan setoran masuk Rp500.000</button>
+          <button type="button" id="simOut">Simulasikan penarikan Rp100.000</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Lompat ke layar</h3>
+        <p class="field-hint" style="margin-top:4px">PIN contoh untuk uji: <strong>123456</strong>.</p>
+        <div class="jump" id="jump">
+          <button type="button" data-jump="p01">P-01 Masuk dengan PIN</button>
+          <button type="button" data-jump="p02">P-02 Beranda</button>
+          <button type="button" data-jump="p03">P-03 Mutasi rekening</button>
+          <button type="button" data-jump="p04">P-04 Ajukan pembiayaan</button>
+          <button type="button" data-jump="p05">P-05 Notifikasi</button>
+          <button type="button" data-jump="p06">P-06 QR anggota</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/anggota.js" defer></script>
+</body>
+</html>

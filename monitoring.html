@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitoring Anggota & Pembiayaan · Back Office BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="bo-header">
+    <div class="bo-header-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Back Office · Cabang Malang Utama</span></a>
+      <nav class="bo-nav" aria-label="Modul back office">
+        <ul>
+          <li><a href="pengajuan.html">Pengajuan</a></li>
+          <li><a href="persetujuan.html">Persetujuan</a></li>
+          <li><a href="monitoring.html" aria-current="page">Monitoring</a></li>
+          <li><a href="rekonsiliasi.html">Rekonsiliasi Kasir</a></li>
+          <li><a href="integrasi.html">Integrasi CBS</a></li>
+        </ul>
+      </nav>
+      <span class="bo-role"><span class="sr-only">Masuk sebagai: </span>Manajer Cabang</span>
+    </div>
+  </header>
+
+  <main class="bo-main" id="main">
+    <details class="testbar">
+      <summary>Panel uji prototype (D-01 dan ekspor US-06)</summary>
+      <div class="testbar-body">
+        <div class="field">
+          <label for="simConn">Koneksi sistem inti BMT</label>
+          <select class="select" id="simConn"><option value="ok">Normal</option><option value="down">Terputus (status gagal)</option></select>
+        </div>
+        <div class="field">
+          <label for="simExport">Pembuatan file ekspor</label>
+          <select class="select" id="simExport"><option value="ok">Berhasil</option><option value="fail">Gagal 3 kali (status GAGAL)</option></select>
+        </div>
+      </div>
+    </details>
+
+    <div class="page-head">
+      <h1>Monitoring anggota &amp; pembiayaan</h1>
+      <p id="rangeText">Cabang Malang Utama · rentang 01/09/2026 sampai 28/09/2026</p>
+    </div>
+
+    <form class="card" id="filterForm" style="margin-bottom:22px" novalidate>
+      <div class="filters">
+        <div class="field"><label for="fCabang">Cabang</label>
+          <select class="select" id="fCabang"><option>Malang Utama</option></select></div>
+        <div class="field"><label for="fWilayah">Wilayah / pasar</label>
+          <select class="select" id="fWilayah"><option value="">Semua wilayah</option><option>Pasar Besar</option><option>Pasar Dinoyo</option></select></div>
+        <div class="field"><label for="fKolek">Kolektibilitas</label>
+          <select class="select" id="fKolek"><option value="">Semua status</option><option>Lancar</option><option>Dalam perhatian</option><option>Menunggak</option></select></div>
+        <div class="field"><label for="fJenis">Jenis pembiayaan</label>
+          <select class="select" id="fJenis"><option value="">Semua jenis</option><option>Murabahah</option><option>Modal kerja</option><option>Musyarakah</option></select></div>
+        <div class="field"><label for="fFrom">Tanggal dari</label><input class="input" type="date" id="fFrom" value="2026-09-01"></div>
+        <div class="field"><label for="fTo">Sampai</label><input class="input" type="date" id="fTo" value="2026-09-28"></div>
+        <div class="filter-actions">
+          <button class="btn btn-primary" type="submit">Terapkan</button>
+          <button class="btn btn-secondary" type="button" id="btnReset">Reset</button>
+        </div>
+      </div>
+      <span class="field-error" id="dateErr" role="alert"></span>
+    </form>
+
+    <div id="content"></div>
+
+    <section class="card" style="margin-top:22px" aria-labelledby="exportTitle" id="exportCard" hidden>
+      <div class="card-head"><h2 id="exportTitle">Status laporan ekspor</h2></div>
+      <div id="jobs"></div>
+    </section>
+
+    <p class="footnote">Data pada rancangan ini contoh ilustrasi dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri.</p>
+  </main>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/monitoring.js" defer></script>
+</body>
+</html>

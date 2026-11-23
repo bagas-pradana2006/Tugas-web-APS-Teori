@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BMT Mobile Field System · UI gabungan lima modul · KSPPS BMT Sidogiri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Lewati ke konten</a>
+  <header class="bo-header">
+    <div class="bo-header-inner">
+      <a class="bo-brand" href="index.html"><strong>KSPPS BMT Sidogiri</strong><span>Final Project APS 2026 · Kelompok 2 Nice Gang</span></a>
+    </div>
+  </header>
+
+  <main class="index-main" id="main">
+    <p class="eyebrow-text">KSPPS BMT Sidogiri · Final Project APS 2026</p>
+    <h1>BMT Mobile Field System: UI gabungan lima modul</h1>
+    <p class="lead">Satu prototype web untuk seluruh solusi kelompok: aplikasi HP untuk petugas jemput bola di pasar dan untuk anggota, serta back office web untuk analis, komite, manajer, kasir, dan Admin IT cabang Malang. Isi layar diambil dari Figma "Tugas APS Projek Akhir" dan laporan tiap PIC.</p>
+
+    <div class="module-table">
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">Daftar modul dan halaman prototype</caption>
+          <thead><tr><th>Modul</th><th>PIC</th><th>Pengguna</th><th>Layar</th><th>Buka prototype</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Mobile Collector Real-Time</strong></td><td>Muhammad Rafi Fadillah</td><td>Petugas lapangan, kasir cabang</td><td>M-01 s.d. M-05, W-01</td>
+              <td><a href="petugas.html">Aplikasi petugas</a><br><a href="rekonsiliasi.html">Rekonsiliasi kasir</a></td></tr>
+            <tr><td><strong>Digital Credit Assessment</strong></td><td>Ibrahim Bagas Pradana</td><td>Analis kredit, admin scoring</td><td>S-01 s.d. S-04, US04-01 s.d. 06</td>
+              <td><a href="pengajuan.html">Pengajuan &amp; scoring</a></td></tr>
+            <tr><td><strong>Digital Approval &amp; Workflow</strong></td><td>Izzudin Ahmad Yasin</td><td>Komite pembiayaan, manajer</td><td>A-01</td>
+              <td><a href="persetujuan.html">Antrean persetujuan</a></td></tr>
+            <tr><td><strong>Dashboard Monitoring</strong></td><td>Adli Sejati</td><td>Manajer cabang, analis kredit</td><td>D-01, ekspor US-06</td>
+              <td><a href="monitoring.html">Monitoring</a></td></tr>
+            <tr><td><strong>Integrasi CBS</strong></td><td>R. Ahmad Syarif Hidayatullah</td><td>Admin IT, akuntansi</td><td>I-01</td>
+              <td><a href="integrasi.html">Monitor integrasi</a></td></tr>
+            <tr><td><strong>Aplikasi Anggota (BMT Pasra Mobile)</strong></td><td>R. Ahmad Syarif Hidayatullah</td><td>Anggota / pedagang UMKM</td><td>P-01 s.d. P-06, notifikasi US-03</td>
+              <td><a href="anggota.html">Aplikasi anggota</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="flows">
+      <section class="flow">
+        <h2>Alur setoran</h2>
+        <p>Petugas memindai QR dan mencatat setoran (<a href="petugas.html">M-02, M-03</a>), kasir mencocokkan kas shift (<a href="rekonsiliasi.html">W-01</a>), lalu jurnal terposting ke CBS (<a href="integrasi.html">I-01</a>). Anggota menerima notifikasi di <a href="anggota.html">BMT Pasra Mobile</a>.</p>
+      </section>
+      <section class="flow">
+        <h2>Alur pembiayaan</h2>
+        <p>Analis mengisi pengajuan dan menghitung skor (<a href="pengajuan.html">S-01, S-02</a>), mengajukan ke komite di antrean persetujuan (<a href="persetujuan.html">A-01</a>), lalu kolektibilitasnya dipantau manajer (<a href="monitoring.html">D-01</a>).</p>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:26px" aria-labelledby="cara">
+      <h2 id="cara">Cara menguji</h2>
+      <ul class="rules">
+        <li>Setiap halaman yang punya alur alternatif memiliki <strong>Panel uji prototype</strong> di bagian atas untuk memicu kondisi gagal, kosong, atau risiko tinggi.</li>
+        <li>PIN contoh untuk aplikasi anggota dan otorisasi komite: <strong>123456</strong>.</li>
+        <li>Semua angka dan nama adalah data contoh dari laporan kelompok, bukan data aktual KSPPS BMT Sidogiri. Tidak ada data yang dikirim ke server.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
