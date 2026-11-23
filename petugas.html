@@ -21,6 +21,15 @@
   <main class="mobile-stage" id="main">
     <h1 class="sr-only">Prototype aplikasi petugas lapangan</h1>
     <div class="phone" aria-label="Layar HP petugas">
+      <div class="phone-status" aria-hidden="true">
+        <span class="ps-time">09.41</span>
+        <span class="ps-island"></span>
+        <span class="ps-icons">
+          <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+          <svg viewBox="0 0 16 12"><path d="M8 11.5l2.4-2.9a3.6 3.6 0 00-4.8 0zM3.6 6.4a6.6 6.6 0 018.8 0l1.6-1.9a9.1 9.1 0 00-12 0zM.4 2.6a11.6 11.6 0 0115.2 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="1.6"/><rect x="23.6" y="4" width="1.8" height="4" rx=".9" opacity=".45"/></svg>
+        </span>
+      </div>
       <div id="toastAnchor"></div>
 
       <!-- M-01 Login -->
@@ -112,26 +121,23 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
           <span>Riwayat <span class="tab-count" id="pendCount"></span></span></button>
       </nav>
+      <div class="home-bar" aria-hidden="true"><span></span></div>
     </div>
 
     <aside class="side" aria-labelledby="sideTitle">
-      <h2 id="sideTitle">Mobile Collector Real-Time</h2>
-      <p>PIC: Muhammad Rafi Fadillah. Petugas jemput bola di pasar memindai QR anggota, mencatat setoran, dan mencetak resi. Transaksi tetap tersimpan di HP saat offline lalu tersinkron otomatis ketika sinyal kembali.</p>
-      <div class="card">
-        <h3>Lompat ke layar</h3>
-        <div class="jump" id="jump">
-          <button type="button" data-jump="m01">M-01 Login petugas</button>
-          <button type="button" data-jump="m02">M-02 Validasi anggota</button>
-          <button type="button" data-jump="m02b">M-02b Anggota nonaktif</button>
-          <button type="button" data-jump="m03">M-03 Input setoran</button>
-          <button type="button" data-jump="m04">M-04 Riwayat &amp; sinkronisasi</button>
-        </div>
-        <p class="field-hint" style="margin-top:12px">Ketuk label Online/Offline di layar untuk mensimulasikan sinyal hilang. Kata sandi contoh: bebas, minimal 6 karakter.</p>
-      </div>
-      <div class="card">
-        <h3>Sisi kasir</h3>
-        <p style="margin-top:6px">Setoran petugas dicocokkan kasir di <a href="rekonsiliasi.html">Rekonsiliasi kas shift (W-01)</a>.</p>
-      </div>
+      <h2 id="sideTitle">Mobile Collector</h2>
+      <p class="side-pic">PIC: Muhammad Rafi Fadillah</p>
+      <label class="side-label" for="jumpSel">Layar</label>
+      <select class="select side-select" id="jumpSel">
+        <option value="m01">M-01 Login petugas</option>
+        <option value="m02">M-02 Validasi anggota</option>
+        <option value="m02b">M-02b Anggota nonaktif</option>
+        <option value="m03">M-03 Input setoran</option>
+        <option value="m05" disabled>M-05 Konfirmasi &amp; resi (lewat M-03)</option>
+        <option value="m04">M-04 Riwayat &amp; sinkronisasi</option>
+      </select>
+      <p class="side-hint">Ketuk Online/Offline di layar untuk simulasi sinyal hilang. Kata sandi contoh: bebas, minimal 6 karakter.</p>
+      <p class="side-hint">Sisi kasir: <a href="rekonsiliasi.html">Rekonsiliasi kas (W-01)</a></p>
     </aside>
   </main>
 

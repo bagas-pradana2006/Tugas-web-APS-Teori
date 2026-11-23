@@ -33,7 +33,7 @@
     $$("#tabbar [data-tab]").forEach((b) => {
       if (b.dataset.tab === TAB_OF[id]) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
     });
-    $$("#jump [data-jump]").forEach((b) => b.setAttribute("aria-current", b.dataset.jump === id ? "true" : "false"));
+    $("#jumpSel").value = id;
     render();
     const scr = $("#" + id);
     scr.scrollTop = 0;
@@ -42,12 +42,10 @@
   }
   $("#tabbar").addEventListener("click", (e) => { const b = e.target.closest("[data-tab]"); if (b) show(b.dataset.tab); });
   document.addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (b) show(b.dataset.go); });
-  $("#jump").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-jump]");
-    if (!b) return;
-    if (b.dataset.jump !== "p01") state.loggedIn = true;
-    else logout("");
-    show(b.dataset.jump);
+  $("#jumpSel").addEventListener("change", (e) => {
+    const j = e.target.value;
+    if (j !== "p01") { state.loggedIn = true; armIdle(); } else logout("");
+    show(j);
   });
 
   // ---------- P-01 PIN ----------

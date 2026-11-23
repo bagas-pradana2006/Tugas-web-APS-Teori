@@ -32,7 +32,7 @@
       const on = (b.dataset.tab === "m04") === (id === "m04");
       if (on) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
     });
-    $$("#jump [data-jump]").forEach((b) => b.setAttribute("aria-current", b.dataset.jump === id ? "true" : "false"));
+    $("#jumpSel").value = id;
     if (id === "m04") renderHist();
     const scr = $("#" + id);
     scr.scrollTop = 0;
@@ -237,11 +237,9 @@
   });
 
   // ---------- Lompat layar (panel samping) ----------
-  $("#jump").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-jump]");
-    if (!b) return;
-    const j = b.dataset.jump;
-    if (j === "m02b") { show("m02"); pickMember("04377"); $("#jump [data-jump=m02b]").setAttribute("aria-current", "true"); return; }
+  $("#jumpSel").addEventListener("change", (e) => {
+    const j = e.target.value;
+    if (j === "m02b") { show("m02"); pickMember("04377"); $("#jumpSel").value = "m02b"; return; }
     if (j === "m02") { show("m02"); pickMember("04312"); return; }
     if (j === "m03") { pickMember("04312"); $("#btnToInput").click(); return; }
     show(j);

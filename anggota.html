@@ -21,6 +21,15 @@
   <main class="mobile-stage" id="main">
     <h1 class="sr-only">Prototype aplikasi anggota BMT Pasra Mobile</h1>
     <div class="phone" aria-label="Layar HP anggota">
+      <div class="phone-status" aria-hidden="true">
+        <span class="ps-time">09.41</span>
+        <span class="ps-island"></span>
+        <span class="ps-icons">
+          <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+          <svg viewBox="0 0 16 12"><path d="M8 11.5l2.4-2.9a3.6 3.6 0 00-4.8 0zM3.6 6.4a6.6 6.6 0 018.8 0l1.6-1.9a9.1 9.1 0 00-12 0zM.4 2.6a11.6 11.6 0 0115.2 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="1.6"/><rect x="23.6" y="4" width="1.8" height="4" rx=".9" opacity=".45"/></svg>
+        </span>
+      </div>
       <div id="pushSlot" aria-live="assertive"></div>
 
       <!-- P-01 PIN -->
@@ -120,31 +129,29 @@
         <button type="button" data-tab="p04"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M13 12v6M10 15h6"/></svg>Ajukan</button>
         <button type="button" data-tab="p05"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4z"/><path d="M10 20a2 2 0 004 0"/></svg><span>Notifikasi <span class="tab-count" id="unreadCount"></span></span></button>
       </nav>
+      <div class="home-bar" aria-hidden="true"><span></span></div>
     </div>
 
     <aside class="side" aria-labelledby="sideTitle">
       <h2 id="sideTitle">BMT Pasra Mobile</h2>
-      <p>PIC: R. Ahmad Syarif Hidayatullah. Anggota memantau saldo, mutasi, dan pembiayaan, menerima notifikasi transaksi real-time (US-03), dan menunjukkan QR saat setor ke petugas.</p>
-      <div class="card">
-        <h3>Uji notifikasi US-03</h3>
-        <p style="margin-top:6px">Kirim event transaksi terkonfirmasi. Push muncul di layar HP, lalu ketuk untuk membuka detail (status DIBACA).</p>
-        <div class="jump">
-          <button type="button" id="simIn">Simulasikan setoran masuk Rp500.000</button>
-          <button type="button" id="simOut">Simulasikan penarikan Rp100.000</button>
-        </div>
+      <p class="side-pic">PIC: R. Ahmad Syarif Hidayatullah</p>
+      <label class="side-label" for="jumpSel">Layar</label>
+      <select class="select side-select" id="jumpSel">
+        <option value="p01">P-01 Masuk dengan PIN</option>
+        <option value="p02">P-02 Beranda</option>
+        <option value="p03">P-03 Mutasi rekening</option>
+        <option value="p04">P-04 Ajukan pembiayaan</option>
+        <option value="p05">P-05 Notifikasi</option>
+        <option value="p05d" disabled>Detail transaksi (dari notifikasi)</option>
+        <option value="p06">P-06 QR anggota</option>
+      </select>
+      <p class="side-hint">PIN contoh: <strong>123456</strong></p>
+      <p class="side-label" style="margin-top:14px">Uji notifikasi US-03</p>
+      <div class="side-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="simIn">+ Setoran Rp500.000</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="simOut">− Penarikan Rp100.000</button>
       </div>
-      <div class="card">
-        <h3>Lompat ke layar</h3>
-        <p class="field-hint" style="margin-top:4px">PIN contoh untuk uji: <strong>123456</strong>.</p>
-        <div class="jump" id="jump">
-          <button type="button" data-jump="p01">P-01 Masuk dengan PIN</button>
-          <button type="button" data-jump="p02">P-02 Beranda</button>
-          <button type="button" data-jump="p03">P-03 Mutasi rekening</button>
-          <button type="button" data-jump="p04">P-04 Ajukan pembiayaan</button>
-          <button type="button" data-jump="p05">P-05 Notifikasi</button>
-          <button type="button" data-jump="p06">P-06 QR anggota</button>
-        </div>
-      </div>
+      <p class="side-hint">Push muncul di layar HP. Ketuk untuk buka detail (status DIBACA).</p>
     </aside>
   </main>
 
