@@ -434,11 +434,10 @@ dialog.modal h2 { margin-bottom: 8px; }
   display: grid; grid-template-columns: auto 230px; justify-content: center; gap: 36px; align-items: start;
 }
 
-/* Bingkai HP. Lebar dan tinggi diatur js/app.js sesuai pilihan Ukuran layar
-   (layar 390 x 844 px + bezel 11 px), lalu diperkecil dengan transform bila tidak muat. */
+/* Bingkai HP ukuran iPhone Pro Max: layar 430 x 932 px + bezel 11 px, tampil ukuran asli. */
 .phone-wrap { position: relative; }
 .phone {
-  width: 412px; height: 866px; transform-origin: top left;
+  width: 452px; height: 954px;
   background: var(--bg); border-radius: 54px; border: 11px solid #121614;
   box-shadow: 0 0 0 2px #3a413d, 0 26px 60px rgba(14, 59, 48, 0.28);
   overflow: hidden; display: flex; flex-direction: column; position: relative;
@@ -454,17 +453,9 @@ dialog.modal h2 { margin-bottom: 8px; }
 .home-bar { flex: none; height: 24px; display: grid; place-items: center; }
 .home-bar span { width: 128px; height: 5px; border-radius: 3px; background: #121614; }
 .tabbar:not([hidden]) + .home-bar { background: var(--surface); }
-/* iPhone klasik (SE / 8 / 320 px): bezel atas-bawah tebal, tanpa dynamic island dan home indicator. */
-.phone.classic { border-width: 58px 12px; border-radius: 44px; }
-.phone.classic .ps-island { visibility: hidden; }
-.phone.classic .phone-status { height: 28px; padding: 0 16px; font-size: 0.78rem; }
-.phone.classic .home-bar { display: none; }
-.phone.classic .push { top: 32px; }
-.phone-wrap:has(.phone.classic)::after {
-  content: ""; position: absolute; left: 50%; bottom: 9px; width: 40px; height: 40px; margin-left: -20px;
-  border-radius: 50%; border: 2px solid #3a413d;
-}
-.phone-screen { flex: 1; overflow-y: auto; padding: 8px 18px 20px; display: flex; flex-direction: column; }
+.phone-screen {
+  flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; padding: 8px 18px 20px; display: flex; flex-direction: column; }
+.phone-screen::-webkit-scrollbar { display: none; }
 .phone-screen[hidden] { display: none; }
 .m-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
 .m-head h2 { font-size: 1.2rem; }
@@ -652,13 +643,11 @@ dialog.modal h2 { margin-bottom: 8px; }
   .weight-row { grid-template-columns: 1fr 96px; }
   .mobile-stage { padding: 0 0 32px; }
   .phone-wrap { width: 100%; }
-  .phone-wrap::after { display: none; }
-  .phone, .phone.classic { width: 100%; border: 0; border-radius: 0; box-shadow: none; height: auto; min-height: calc(100vh - 56px); transform: none; }
+  .phone { width: 100%; border: 0; border-radius: 0; box-shadow: none; height: auto; min-height: calc(100vh - 56px); }
   .phone-status, .home-bar { display: none; }
   .push { top: 10px; }
   .side { width: calc(100% - 32px); }
   .side-select, .btn-sm { min-height: 44px; }
-  label[for="sizeSel"], #sizeSel, #sizeNote { display: none; }
   .index-main { padding: 32px 16px 48px; }
   .mobile-top-inner { padding: 12px 16px; }
 }
@@ -675,3 +664,4 @@ dialog.modal h2 { margin-bottom: 8px; }
 }
 .mobile-top .bo-brand { order: 0; }
 .phone-screen h2[tabindex="-1"]:focus { outline: none; }
+.m-row .badge { align-self: flex-start; }
